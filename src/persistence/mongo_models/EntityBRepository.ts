@@ -13,6 +13,12 @@ export class EntityBRepository extends MongoRepository<EntityB>{
         return await super.create(item);   
     }
 
+    // async create(item: EntityB): Promise<void>
+    // {
+    //     let toInsert = {_id: item.getId(), name: item.getName()};
+    //     await super.create(toInsert);   
+    // }
+
     async update(id: string, item: EntityB): Promise<any> {
         // Convert ids to ObjectId
         let _id = new ObjectId(id);
@@ -37,14 +43,16 @@ export class EntityBRepository extends MongoRepository<EntityB>{
         throw new Error("Method not implemented.");
     }
 
-    async createIfNotExists(entityB: EntityB): Promise<EntityB>{
+    async createIfNotExists(entityB: EntityB): Promise<void>{
         let resultFind = await this.findOneByName(entityB.getName());
         if(resultFind === null)
         {
-            return await this.create(entityB);
+            await this.create(entityB);
         }
-        entityB.setId(resultFind._id.toString());
-        return entityB;
+        else
+        {
+            entityB.setId(resultFind._id.toString());
+        }
     }
 
     async findOneByName(name: string): Promise<any>

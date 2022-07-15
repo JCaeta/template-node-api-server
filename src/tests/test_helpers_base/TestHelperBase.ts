@@ -1,6 +1,6 @@
-import { Step } from "./Step";
+import { Step } from "../tests_persistence/test_helpers/Step";
 
-export abstract class TestHelperBase{
+export abstract class TestPrinterBase{
     private steps: Step[] = [];
     private testName: string;
 

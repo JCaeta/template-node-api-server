@@ -17,7 +17,7 @@ export class EntityA{
         this._id = props._id || defaults._id;
     }
 
-    public getEntityB(): EntityB {
+    public getEntityB(): any{
         return this.entityB;
     }
 

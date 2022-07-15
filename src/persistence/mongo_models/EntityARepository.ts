@@ -12,6 +12,11 @@ export class EntityARepository extends MongoRepository<EntityA> {
         return await super.create(entityA);
     }
 
+    // async create(entityA: EntityA): Promise<void> {     
+    //     await super.create(entityA);
+    // }
+
+
     async update(id: any, entityA: EntityA): Promise<any> {
         
     }

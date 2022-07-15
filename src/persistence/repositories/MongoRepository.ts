@@ -9,10 +9,19 @@ export abstract class MongoRepository<T extends {setId?: any, getId?: any}> impl
     }
 
     async create(item: T): Promise<T>{
+        
         const result: InsertOneResult<Document> = await this._collection.insertOne(item);
         item.setId(result.insertedId.toString());
         return item;
     }
+
+    // async create(item: any): Promise<void>{
+        
+    //     const result: InsertOneResult<Document> = await this._collection.insertOne(item);
+    //     // await this._collection.insertOne(item);
+        
+    //     // item.setId(result.insertedId.toString());
+    // }
 
     async update(id: any, item: T): Promise<any> {
         const result = await this._collection.replaceOne({_id: id}, item);
