@@ -1,8 +1,8 @@
 import { EntityA } from "../../../entities/EntityA";
 import { EntityB } from "../../../entities/EntityB"; 
 import { MongoUnitOfWork } from "../../../persistence/repositories/MongoUnitOfWork";
-import { TestGeneratorEntityA } from "../../tests_entities/test_helpers/TestGeneratorEntityA";
-import { TestGeneratorEntityB } from "../../tests_entities/test_helpers/TestGeneratorEntityB";
+import { TestGeneratorEntityA } from "../../../tests/tests_entities/test_helpers/TestGeneratorEntityA";
+import { TestGeneratorEntityB } from "../../../tests/tests_entities/test_helpers/TestGeneratorEntityB";
 import { TestPrinterMongoUnitOfWork } from "../test_helpers/TestPrinterMongoUnitOfWork";
 
 const URI = 'mongodb://localhost:27017';

@@ -9,6 +9,7 @@
         "express": "^4.18.1",
         "jest": "^28.1.2",
         "mongodb": "^4.7.0",
+        "nodemon": "^2.0.19",
         "supertest": "^6.2.4",
         "ts-jest": "^28.0.5",
         "ts-node": "^10.8.2",
@@ -16,9 +17,10 @@
     },
     "name": "mongodb-database-1",
     "version": "1.0.0",
-    "main": "index.ts",
+    "main": "node src/endpoints/endpoints.ts",
     "scripts": {
-        "test": "jest"
+        "test": "jest",
+        "start": "nodemon src/endpoints/endpoints.ts"
     },
     "keywords": [],
     "author": "",

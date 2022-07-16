@@ -31,9 +31,5 @@ app.post('/test-post-request', (req, res) =>{
     res.send({objectInEndpoint: body});
 })
 
-// app.delete('/delete-entity-a', async)
-
 var endpoints = app.listen(PORT, () => {console.log('Serve started on port ' + PORT)});
 export default endpoints;
-
-// Test changing the functional approach by the poo approach

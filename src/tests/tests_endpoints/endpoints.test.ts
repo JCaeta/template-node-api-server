@@ -25,6 +25,7 @@ describe('Test endpoints', () => {
         testPrinter.addObjectCurrentStep({response: response.body});
         testPrinter.printCurrentStep();
         endpoints.close();
+        
     }, TIMEOUT);
 
     test.only('Test createEntityA() request', async () => {
@@ -42,7 +43,6 @@ describe('Test endpoints', () => {
         // 2) Send POST request
         testPrinter.addStep({stepName: '2) Send POST request'});
         let response = await request(e).post('/create-entity-a').send({entityA: entityA});
-        
         testPrinter.addObjectCurrentStep({response: response.body});
         testPrinter.setState('POST request sent');
         testPrinter.printCurrentStep();
