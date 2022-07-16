@@ -1,6 +1,6 @@
-export interface IRead<T> {
-    find(item: T): Promise<T[]>;
-    findOne(id: string): Promise<T>;
+export interface IRead {
+    find(item: any): Promise<any[]>;
+    findOne(id: any): Promise<any>;
 }
 
 

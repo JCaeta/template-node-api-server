@@ -1,9 +1,10 @@
-import { ClientSession, MongoClient } from "mongodb";
-import { EntityA } from "../../entities/EntityA";
+import { ClientSession, MongoClient, ObjectId } from "mongodb";
+import { EntityA } from "../../business_entities/EntityA";
 import { IUnitOfWork } from "../interfaces/IUnitOfWork";
 import { EntityBRepository } from "../mongo_models/EntityBRepository";
 import { EntityARepository } from "../mongo_models/EntityARepository";
-import { EntityB } from "../../entities/EntityB";
+import { EntityB } from "../../business_entities/EntityB";
+import { MongoAdapter } from "./MongoAdapter";
 
 export class MongoUnitOfWork implements IUnitOfWork{
     private connection: MongoClient | undefined;
@@ -43,33 +44,22 @@ export class MongoUnitOfWork implements IUnitOfWork{
         let db = this.connection?.db(this.databaseName);
         if(db != undefined && this.session != undefined)
         {   
+            let mongoEntityA = MongoAdapter.entityABusinessToMongo(entityA);
             let entityBRepository = new EntityBRepository(db, 'entitiesB')
-            await entityBRepository.createIfNotExists(entityA.getEntityB());
+            await entityBRepository.createIfNotExists(mongoEntityA.entityB);
 
             let entityARepository = new EntityARepository(db, 'entitiesA');
-            await entityARepository.create(entityA);
+            await entityARepository.create(mongoEntityA);
         }
     }
-
-    // public createEntityA(entityA: EntityA){
-    //     let db0 = this.connection?.db(this.databaseName);
-    //     if(db0 != undefined && this.session != undefined)
-    //     {   
-    //         let entityBRepository = new EntityBRepository(db0, 'entitiesB')
-    //         entityBRepository.createIfNotExists(entityA.getEntityB());
-
-    //         // var db1 = this.connection?.db(this.databaseName);
-    //         // var entityARepository = new EntityARepository(db1, 'entitiesA');
-    //         // var h = await entityARepository.create(entityA);
-    //     }
-    // }
 
     public async createEntityB(entityB: EntityB){
         let db = this.connection?.db(this.databaseName);
         if(db != undefined && this.session != undefined)
         {   
+            let mongoEntityB = MongoAdapter.entityBBusinessToMongo(entityB)
             let entityBRepository = new EntityBRepository(db, 'entitiesB')
-            await entityBRepository.create(entityB);
+            await entityBRepository.create(mongoEntityB);
         }
     }
 }

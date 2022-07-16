@@ -1,8 +1,7 @@
-import { EntityA } from "../../../entities/EntityA";
-import { EntityB } from "../../../entities/EntityB"; 
+import { EntityA } from "../../../business_entities/EntityA";
+import { EntityB } from "../../../business_entities/EntityB"; 
 import { MongoUnitOfWork } from "../../../persistence/repositories/MongoUnitOfWork";
-import { TestGeneratorEntityA } from "../../tests_entities/test_helpers/TestGeneratorEntityA";
-import { TestGeneratorEntityB } from "../../tests_entities/test_helpers/TestGeneratorEntityB";
+import { TestGeneratorEntityB } from "../../tests_business_entities/test_helpers/TestGeneratorEntityB";
 import { TestPrinterMongoUnitOfWork } from "../test_helpers/TestPrinterMongoUnitOfWork";
 
 const URI = 'mongodb://localhost:27017';
@@ -17,7 +16,7 @@ describe("Test MongoUnitOfWork", () => {
         testHelper.addObjectCurrentStep({uri: URI})
         testHelper.printCurrentStep();
         let mongoUnitOfWork = new MongoUnitOfWork(DATABASE_NAME);
-        mongoUnitOfWork.connect(URI);
+        await mongoUnitOfWork.connect(URI);
         testHelper.setState('Called');
         testHelper.printCurrentStep();
         mongoUnitOfWork.disconnect();
@@ -45,7 +44,7 @@ describe("Test MongoUnitOfWork", () => {
 
     }, TIMEOUT);
 
-    test.only("Test MongoUnitOfWork.createEntityA()", async () => {
+    test("Test MongoUnitOfWork.createEntityA()", async () => {
         console.log("Test MongoUnitOfWork.createEntityA() -----------------------------------------------------------------------------------")
         // 1) Create user
         let testHelper = new TestPrinterMongoUnitOfWork('Test MongoUnitOfWork.createEntityA()');

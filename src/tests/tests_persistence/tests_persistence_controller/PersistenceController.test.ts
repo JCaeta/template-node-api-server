@@ -1,5 +1,5 @@
 import { PersistenceController } from '../../../persistence/PersistenceController';
-import { TestGeneratorEntityA } from '../../tests_entities/test_helpers/TestGeneratorEntityA';
+import { TestGeneratorEntityA } from '../../tests_business_entities/test_helpers/TestGeneratorEntityA';
 import {TestPrinterPersistenceController} from './test_helpers/TestPrinterPersistenceController';
 
 const TIMEOUT = 100000;

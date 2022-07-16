@@ -1,16 +1,18 @@
-import { ObjectId, DeleteResult, InsertOneResult, Db, ClientSession} from "mongodb";
-import { EntityB} from "../../entities/EntityB";
+import { ObjectId, DeleteResult, Db } from "mongodb";
+import { EntityB} from "../../business_entities/EntityB";
 import { MongoRepository } from "../repositories/MongoRepository";
 
-export class EntityBRepository extends MongoRepository<EntityB>{
+export class EntityBRepository extends MongoRepository{
 
     constructor(db: Db, collectionName: string){
         super(db, collectionName);
     }
 
-    async create(item: EntityB): Promise<EntityB>
+    async create(mongoEntityB: any): Promise<void>
     {
-        return await super.create(item);   
+        await super.create(mongoEntityB);
+        // entityB.setId(item._id.toString());
+        // return entityB;   
     }
 
     // async create(item: EntityB): Promise<void>
@@ -19,52 +21,54 @@ export class EntityBRepository extends MongoRepository<EntityB>{
     //     await super.create(toInsert);   
     // }
 
-    async update(id: string, item: EntityB): Promise<any> {
+    async update(_id: ObjectId, item: any): Promise<any> {
         // Convert ids to ObjectId
-        let _id = new ObjectId(id);
+        // let _id = new ObjectId(_id);
         item.setId(new ObjectId(item.getId()))
         const result = await super.update(_id, item);
 
         // Set back again the item's id to string
-        item.setId(id);
+        item._id = _id;
         return result;
     }
 
-    async delete(id: string): Promise<DeleteResult> {
-        const _id = new ObjectId(id);
-        return await super.delete(_id);
+    async delete(id: ObjectId): Promise<DeleteResult> {
+        // const _id = new ObjectId(id);
+        return await super.delete(id);
     }
 
-    async find(identityProvider: EntityB): Promise<EntityB[]> {
+    async find(entityB: any): Promise<any[]> {
+        throw new Error("Method not implemented.");
+    }a
+
+    async findOne(id: any): Promise<any> {
         throw new Error("Method not implemented.");
     }
 
-    async findOne(id: any): Promise<EntityB> {
-        throw new Error("Method not implemented.");
-    }
-
-    async createIfNotExists(entityB: EntityB): Promise<void>{
-        let resultFind = await this.findOneByName(entityB.getName());
+    async createIfNotExists(entityB: any): Promise<void>{
+        let resultFind = await this.findOneByName(entityB.name);
         if(resultFind === null)
         {
             await this.create(entityB);
         }
         else
         {
-            entityB.setId(resultFind._id.toString());
+            // entityB.setId(resultFind._id.toString());
+            entityB._id = resultFind._id;
         }
     }
 
     async findOneByName(name: string): Promise<any>
     {
-        let result = await this._collection.findOne({name: name});
+        let result = await this.collection.findOne({name: name});
         if(result == null)
         {
             return null;
         }
-        let props = {id: result._id.toString(), name: result.name};
-        let identityProvider: EntityB= new EntityB(props);
-        return identityProvider;
+        return result;
+        // let props = {id: result._id.toString(), name: result.name};
+        // let identityProvider: EntityB= new EntityB(props);
+        // return identityProvider;
     }
 }
 

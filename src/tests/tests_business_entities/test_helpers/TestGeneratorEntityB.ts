@@ -1,4 +1,4 @@
-import { EntityB } from "../../../entities/EntityB";
+import { EntityB } from "../../../business_entities/EntityB";
 
 export class TestGeneratorEntityB {
     constructor() {}

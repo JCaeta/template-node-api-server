@@ -1,5 +1,5 @@
-import { EntityA } from "../entities/EntityA";
-import { EntityB } from "../entities/EntityB";
+import { EntityA } from "../business_entities/EntityA";
+import { EntityB } from "../business_entities/EntityB";
 import { PersistenceController } from "../persistence/PersistenceController";
 
 export class ApiController{

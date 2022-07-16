@@ -1,4 +1,4 @@
-import { EntityA } from "../entities/EntityA";
+import { EntityA } from "../business_entities/EntityA";
 import { MongoUnitOfWork } from "./repositories/MongoUnitOfWork";
 
 const DATABASE_NAME = 'entities_management';

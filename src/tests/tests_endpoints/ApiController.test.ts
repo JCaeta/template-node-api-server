@@ -1,5 +1,5 @@
 import { TestPrinterEndpoints } from "./test_helpers/TestPrinterEndpoints";
-import { TestGeneratorEntityA } from "../tests_entities/test_helpers/TestGeneratorEntityA";
+import { TestGeneratorEntityA } from "../tests_business_entities/test_helpers/TestGeneratorEntityA";
 import { ApiController } from "../../endpoints/ApiController";
 
 const TIMEOUT = 100000;

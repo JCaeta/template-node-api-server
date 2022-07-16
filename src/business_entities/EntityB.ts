@@ -1,25 +1,25 @@
 const defaults = {
-    id: null,
-    name: null
+    id: undefined,
+    name: undefined
 }
 
 export class EntityB{
-    private _id: any
+    private id: any
     public name: string;
 
     constructor(props: any){
-        this._id = props.id || defaults.id;
+        this.id = props.id || defaults.id;
         this.name = props.name || defaults.name;
     }
 
     public setId(id: any)
     {
-        this._id = id;
+        this.id = id;
     }
 
     public getId(): string
     {
-        return this._id;
+        return this.id;
     }
 
     public setName(name: string)

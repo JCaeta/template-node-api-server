@@ -1,17 +1,18 @@
 import { Collection, Db, DeleteResult, InsertOneResult} from "mongodb";
 import { BaseRepository } from "../interfaces/BaseRepository";
 
-export abstract class MongoRepository<T extends {setId?: any, getId?: any}> implements BaseRepository<T>{
-    public readonly _collection: Collection;
+// export abstract class MongoRepository<T extends {setId?: any, getId?: any}> implements BaseRepository<T>{
+export abstract class MongoRepository implements BaseRepository{
+    public readonly collection: Collection;
 
     constructor(db: Db, collectionName: string){
-        this._collection = db.collection(collectionName)
+        this.collection = db.collection(collectionName)
     }
 
-    async create(item: T): Promise<T>{
+    async create(item: any): Promise<any>{
         
-        const result: InsertOneResult<Document> = await this._collection.insertOne(item);
-        item.setId(result.insertedId.toString());
+        const result: InsertOneResult<Document> = await this.collection.insertOne(item);
+        // item.setId(result.insertedId.toString());
         return item;
     }
 
@@ -23,16 +24,16 @@ export abstract class MongoRepository<T extends {setId?: any, getId?: any}> impl
     //     // item.setId(result.insertedId.toString());
     // }
 
-    async update(id: any, item: T): Promise<any> {
-        const result = await this._collection.replaceOne({_id: id}, item);
+    async update(id: any, item: any): Promise<any> {
+        const result = await this.collection.replaceOne({_id: id}, item);
         return result;
     }
 
     async delete(id: any): Promise<DeleteResult> {
-        const result = await this._collection.deleteOne({_id: id});
+        const result = await this.collection.deleteOne({_id: id});
         return result;
     }
 
-    find(item: T): any{}
+    find(item: any): any{}
     findOne(id: string): any{}
 }

@@ -1,4 +1,4 @@
-export interface IWrite<T> {
-    find(item: T): Promise<T[]>;
-    findOne(id: string): Promise<T>;
+export interface IWrite {
+    find(item: any): Promise<any[]>;
+    findOne(id: any): Promise<any>;
 }

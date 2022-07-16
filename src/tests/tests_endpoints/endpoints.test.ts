@@ -1,9 +1,9 @@
-import { EntityA } from "../../entities/EntityA";
-import { EntityB } from "../../entities/EntityB";
+import { EntityA } from "../../business_entities/EntityA";
+import { EntityB } from "../../business_entities/EntityB";
 import { TestPrinterEndpoints } from "./test_helpers/TestPrinterEndpoints";
 import endpoints from '../../endpoints/endpoints';
 import request from 'supertest';
-import { TestGeneratorEntityA } from "../tests_entities/test_helpers/TestGeneratorEntityA";
+import { TestGeneratorEntityA } from "../tests_business_entities/test_helpers/TestGeneratorEntityA";
 
 const TIMEOUT = 1000000;
 
@@ -28,7 +28,7 @@ describe('Test endpoints', () => {
         
     }, TIMEOUT);
 
-    test.only('Test createEntityA() request', async () => {
+    test('Test createEntityA() request', async () => {
         console.log('Test createEntityA() request ----------------------------------------------------- ');
         let testPrinter = new TestPrinterEndpoints('Test createEntityA() request');
         let e = endpoints;
