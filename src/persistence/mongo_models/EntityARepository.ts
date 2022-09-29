@@ -12,25 +12,20 @@ export class EntityARepository extends MongoRepository {
         await super.create(entityA);
     }
 
-    // async create(entityA: EntityA): Promise<void> {     
-    //     await super.create(entityA);
-    // }
-
-
-    async update(id: any, entityA: EntityA): Promise<any> {
+    async update(id: ObjectId, entityA: any): Promise<any> {
         
     }
 
-    async delete(id: string): Promise<DeleteResult> {
+    async delete(id: ObjectId): Promise<DeleteResult> {
         const result: DeleteResult = await this.collection.deleteOne({"_id": new ObjectId(id)});
         return result;
     }
 
-    async find(item: EntityA): Promise<EntityA[]> {
+    async find(item: ObjectId): Promise<any[]> {
         throw new Error("Method not implemented.");
     }
 
-    async findOne(id: string): Promise<EntityA> {
+    async findOne(id: ObjectId): Promise<any> {
         throw new Error("Method not implemented.");
     }
 }

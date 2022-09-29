@@ -1,5 +1,4 @@
 import { ObjectId, DeleteResult, Db } from "mongodb";
-import { EntityB} from "../../business_entities/EntityB";
 import { MongoRepository } from "../repositories/MongoRepository";
 
 export class EntityBRepository extends MongoRepository{
@@ -11,19 +10,9 @@ export class EntityBRepository extends MongoRepository{
     async create(mongoEntityB: any): Promise<void>
     {
         await super.create(mongoEntityB);
-        // entityB.setId(item._id.toString());
-        // return entityB;   
     }
 
-    // async create(item: EntityB): Promise<void>
-    // {
-    //     let toInsert = {_id: item.getId(), name: item.getName()};
-    //     await super.create(toInsert);   
-    // }
-
     async update(_id: ObjectId, item: any): Promise<any> {
-        // Convert ids to ObjectId
-        // let _id = new ObjectId(_id);
         item.setId(new ObjectId(item.getId()))
         const result = await super.update(_id, item);
 
@@ -33,7 +22,6 @@ export class EntityBRepository extends MongoRepository{
     }
 
     async delete(id: ObjectId): Promise<DeleteResult> {
-        // const _id = new ObjectId(id);
         return await super.delete(id);
     }
 
@@ -41,7 +29,7 @@ export class EntityBRepository extends MongoRepository{
         throw new Error("Method not implemented.");
     }a
 
-    async findOne(id: any): Promise<any> {
+    async findOne(id: ObjectId): Promise<any> {
         throw new Error("Method not implemented.");
     }
 
@@ -53,7 +41,6 @@ export class EntityBRepository extends MongoRepository{
         }
         else
         {
-            // entityB.setId(resultFind._id.toString());
             entityB._id = resultFind._id;
         }
     }
@@ -65,10 +52,7 @@ export class EntityBRepository extends MongoRepository{
         {
             return null;
         }
-        return result;
-        // let props = {id: result._id.toString(), name: result.name};
-        // let identityProvider: EntityB= new EntityB(props);
-        // return identityProvider;
+        return result;;
     }
 }
 
